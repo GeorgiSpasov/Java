@@ -19,3 +19,9 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+
+JavaSampleCodes/nbproject/private/
+JavaSampleCodes/build/
+JavaSampleCodes/nbbuild/
+JavaSampleCodes/dist/
+JavaSampleCodes/nbdist/
