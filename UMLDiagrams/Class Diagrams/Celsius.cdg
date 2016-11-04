@@ -32,7 +32,7 @@
         <Method name="convertiToCelsius" returnType="double" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="TestConvert" package="" visibility="public" xPosition="260.0" yPosition="377.0">
+    <Class name="TestConvert" package="" visibility="public" xPosition="582.0" yPosition="89.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -40,8 +40,5 @@
       </Methods>
     </Class>
   </ClassDiagramComponents>
-  <ClassDiagramRelations>
-    <HasRelation name="CreatesC" source="TestConvert" target="Celsius" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="CreatesF" source="TestConvert" target="Fahrenheit" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-  </ClassDiagramRelations>
+  <ClassDiagramRelations/>
 </ClassDiagram>
