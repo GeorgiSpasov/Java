@@ -5,6 +5,8 @@
  */
 package javatesting;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Shadow
@@ -16,6 +18,16 @@ public class JavaTesting {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        //System.out.println("Welcome\nto\nJava\nProgramming!");
+        System.out.printf("%s\n%s\n", "Welcome to", "Java Programming!");
+        
+        
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("Enter number:");
+        int number = input.nextInt();
+        System.out.println(number);
+        
     }
-    
+
 }
