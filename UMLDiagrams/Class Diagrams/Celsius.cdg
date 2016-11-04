@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Celsius">
+  <ClassDiagramComponents>
+    <Class name="Celsius" package="" visibility="public" xPosition="89.0" yPosition="89.0">
+      <Fields>
+        <Field name="Celsius" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="setCelsius" returnType="void" visibility="public">
+          <Argument type="double" name="tempC"/>
+        </Method>
+        <Method name="getCelsius" returnType="double" visibility="public"/>
+        <Method name="convertToFahrenheit" returnType="double" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Fahrenheit" package="" visibility="public" xPosition="326.0" yPosition="89.0">
+      <Fields>
+        <Field name="fahrenheit" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="setFahrenheit" returnType="void" visibility="public">
+          <Argument type="double" name="tempF"/>
+        </Method>
+        <Method name="getFahrenheit" returnType="double" visibility="public"/>
+        <Method name="convertiToCelsius" returnType="double" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="TestConvert" package="" visibility="public" xPosition="260.0" yPosition="377.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="CreatesC" source="TestConvert" target="Celsius" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="CreatesF" source="TestConvert" target="Fahrenheit" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
