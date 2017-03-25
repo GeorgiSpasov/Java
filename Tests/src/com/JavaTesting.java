@@ -1,15 +1,19 @@
 package com;
 
-import java.util.Scanner;
-
 public class JavaTesting {
 
     public static void main(String[] args) {
-
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("Enter number: ");
-        double num = input.nextDouble();
-        System.out.printf("Square result: %f.\t", Math.pow(num, 2));
+        int a[][] = {
+            {1, 2, 3},
+            {4, 5},
+            {6, 7, 8}
+        };
+        
+        for (int[] i : a) {
+            for (int j : i) {
+                System.out.print(j);
+            }
+            System.out.println("");            
+        }
     }
 }
