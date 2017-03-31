@@ -1,5 +1,7 @@
 package com;
 
+import static com.Time.getCounter;
+
 public class TimeTest {
 
     public static void main(String[] args) {
@@ -12,10 +14,10 @@ public class TimeTest {
         time5 = null;
         System.gc();
         Runtime.getRuntime().runFinalization();
-        
+
         System.out.println(time4);
-        System.out.println(Time.getCounter());
-        System.out.println(time1.getId());
+        System.out.println(getCounter());
+        System.out.println(time1.getID());
         System.out.println(time1.getCounter());
 
         time2.setHour(22);

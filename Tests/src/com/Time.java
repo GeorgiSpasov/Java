@@ -5,8 +5,8 @@ public class Time {
     private int hour;
     private int minute;
     private int second;
-    private int id;
-    private static int counter = 0;
+    private final int ID;
+    private static int counter;
 
     public Time() {
         this(0, 0, 0);
@@ -24,7 +24,7 @@ public class Time {
         setHour(hour);
         setMinute(minute);
         setSecond(second);
-        setId();
+        this.ID = counter++;
         System.out.println(this);
     }
 
@@ -56,13 +56,8 @@ public class Time {
         this.second = second;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId() {
-        this.id = counter;
-        ++counter;
+    public int getID() {
+        return ID;
     }
 
     public static int getCounter() {
@@ -80,6 +75,6 @@ public class Time {
                 getHour(),
                 getMinute(),
                 getSecond(),
-                getId());
+                getID());
     }
 }
