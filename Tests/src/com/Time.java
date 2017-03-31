@@ -6,7 +6,7 @@ public class Time {
     private int minute;
     private int second;
     private int id;
-    private static int counter;
+    private static int counter = 0;
 
     public Time() {
         this(0, 0, 0);
@@ -24,7 +24,6 @@ public class Time {
         setHour(hour);
         setMinute(minute);
         setSecond(second);
-        setCounter();
         setId();
         System.out.println(this);
     }
@@ -63,14 +62,16 @@ public class Time {
 
     public void setId() {
         this.id = counter;
+        ++counter;
     }
 
     public static int getCounter() {
         return counter;
     }
 
-    public static void setCounter() {
-        ++Time.counter;
+    @Override
+    protected void finalize() {
+        --counter;
     }
 
     @Override
