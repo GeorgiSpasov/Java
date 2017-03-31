@@ -37,7 +37,7 @@ public class Time {
     }
 
     public void setHour(int hour) {
-        this.hour = hour;
+        this.hour = ((hour >= 0 && hour < 24) ? hour : 0);
     }
 
     public int getMinute() {
@@ -45,7 +45,7 @@ public class Time {
     }
 
     public void setMinute(int minute) {
-        this.minute = minute;
+        this.minute = ((minute >= 0 && minute < 60) ? minute : 0);
     }
 
     public int getSecond() {
@@ -53,7 +53,7 @@ public class Time {
     }
 
     public void setSecond(int second) {
-        this.second = second;
+        this.second = ((second >= 0 && second < 60) ? second : 0);
     }
 
     public int getID() {
