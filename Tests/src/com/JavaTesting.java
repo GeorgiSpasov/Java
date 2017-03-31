@@ -1,19 +1,58 @@
 package com;
 
+import java.util.EnumSet;
+
 public class JavaTesting {
 
-    public static void main(String[] args) {
-        int a[][] = {
-            {1, 2, 3},
-            {4, 5},
-            {6, 7, 8}
-        };
-        
-        for (int[] i : a) {
-            for (int j : i) {
-                System.out.print(j);
+    enum Animal {
+        DOG("woof") {
+            @Override
+            public String say() {
+                return "Sharo";
             }
-            System.out.println("");            
+
+            @Override
+            public String dontSay() {
+                return "Dog Silence";
+            }
+        },
+        CAT("meow") {
+            @Override
+            public String say() {
+                return "Maca";
+            }
+
+            @Override
+            public String dontSay() {
+                return "Cat Silence";
+            }
+        },
+        FISH("burble") {
+            @Override
+            public String say() {
+                return "Goldy";
+            }
+
+            @Override
+            public String dontSay() {
+                return "Fish Silence";
+            }
+        };
+        final String sound; // package access
+
+        private Animal(String s) {
+            sound = s;
         }
+
+        public abstract String say();
+
+        public abstract String dontSay();
+    }
+
+    public static void main(String[] args) {
+
+        EnumSet.range(Animal.CAT, Animal.FISH).forEach((a) -> {
+            System.out.println(a.dontSay());
+        });
     }
 }
