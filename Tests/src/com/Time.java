@@ -1,5 +1,7 @@
 package com;
 
+import jdk.nashorn.internal.objects.Global;
+
 public class Time implements Comparable<Time> {
 
     private int hour;
@@ -82,15 +84,9 @@ public class Time implements Comparable<Time> {
     public int compareTo(Time o) {
         int result = 0;
         if (o != null) {
-            if (getHour() > o.getHour()) {
-                result = 1;
-            } else if (getHour() < o.getHour()) {
-                result = -1;
-            } else {
-                result = 0;
-            }
+            result = getHour() - o.getHour();
         } else {
-            result = -2; // If null is passed
+            result = (int)Global.Infinity; // If null is passed
         }
         return result;
     }
