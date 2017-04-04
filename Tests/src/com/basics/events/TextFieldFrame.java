@@ -3,6 +3,8 @@ package com.basics.events;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -30,6 +32,10 @@ public class TextFieldFrame extends JFrame {
         TextFieldHandler handler = new TextFieldHandler();
         textField1.addActionListener(handler);
         textField2.addActionListener(handler);
+
+        TextFieldMouseHandler mouse = new TextFieldMouseHandler();
+        textField1.addMouseListener(mouse);
+        textField2.addMouseListener(mouse);
     }
 
     private class TextFieldHandler implements ActionListener {
@@ -39,12 +45,40 @@ public class TextFieldFrame extends JFrame {
             String string = "";
 
             if (event.getSource() == textField1) {
-                string = String.format("textField1: %s", textField1.getText());
+                string = String.format("textField1: %s\n(%s)", textField1.getText(), event.getClass().getSimpleName());
             } else if (event.getSource() == textField2) {
-                string = String.format("textField2: %s", textField2.getText());
+                string = String.format("textField2: %s\n(%s)", textField2.getText(), event.getClass().getSimpleName());
             }
 
             JOptionPane.showMessageDialog(null, string);
+        }
+    }
+
+    private class TextFieldMouseHandler implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            String string = "";
+
+            if (e.getSource() == textField1) {
+                string = String.format("textField1: %s\n(%s)", textField1.getText(), e.getClass().getSimpleName());
+            } else if (e.getSource() == textField2) {
+                string = String.format("textField2: %s\n(%s)", textField2.getText(), e.getClass().getSimpleName());
+            }
+
+            JOptionPane.showMessageDialog(null, string);
+        }
+
+        public void mousePressed(MouseEvent e) {
+        }
+
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        public void mouseExited(MouseEvent e) {
         }
     }
 }
