@@ -1,6 +1,6 @@
-package com;
+package com.basics.constructors;
 
-import static com.Time.getCounter;
+import static com.basics.constructors.Time.getCounter;
 
 public class TimeTest {
 

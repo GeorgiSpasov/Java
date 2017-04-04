@@ -1,4 +1,4 @@
-package com;
+package com.basics.constructors;
 
 import jdk.nashorn.internal.objects.Global;
 
