@@ -2,11 +2,12 @@ package com.basics.lambdas;
 
 public class Lambdas {
 
-    public static IAddable<String> stringAdder = (a, b) -> a + b;
+    private static IAddable<String> stringAdder = (a, b) -> {
+        return String.format("The result is: " + a + b);
+    };
 
-    public static String addStrings(String s1, String s2) {
-        return String.format("Concatenated Result: "
-                + stringAdder.add(s1, s2));
+    private static void applyBehaviour(IAddable addable, String s1, String s2) {
+        System.out.println(addable.add(s1, s2));
     }
 
     public static void main(String[] args) {
@@ -14,7 +15,6 @@ public class Lambdas {
         String s1 = "This is ";
         String s2 = "a test!";
 
-        String result = addStrings(s1, s2);
-        System.out.println(result);
+        applyBehaviour(stringAdder, s1, s2);
     }
 }
