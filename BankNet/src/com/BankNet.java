@@ -102,7 +102,7 @@ public class BankNet {
     }
 
     public List<String> findUnsafebanks() {
-        List<Integer> checkBanks = new ArrayList<Integer>();
+        List<Integer> checkBanks = new ArrayList<>();
         for (int i = 0; i < credits.length; i++) {
             if (!isSafeBank(i)) {
                 checkBanks.add(i);
