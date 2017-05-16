@@ -1,16 +1,22 @@
 package com.basics.lambdas;
 
+import java.util.Arrays;
+
 public class Lambdas {
 
-    private static IAddable<String> stringAdder = (a, b) -> {
-        return String.format("The result is: " + a + b);
+    public static IAddable<String> stringAdder = new IAddable<String>() {
+
+        @Override
+        public String add(String t1, String t2) {
+            return String.format(t1 + t2);
+        }
     };
 
-    private static IAddable<String> leghtOrder = (a, b) -> {
+    public static IAddable<String> leghtOrder = (a, b) -> {
         if (a.length() > b.length()) {
-            return String.format("The result is: " + a + b);
+            return String.format(a + b);
         } else {
-            return String.format("The result is: " + b + a);
+            return String.format(b + a);
         }
     };
 
@@ -19,11 +25,18 @@ public class Lambdas {
     }
 
     public static void main(String[] args) {
+        System.out.println(stringAdder.add("hi ", "there"));
 
-        String s1 = "This is ";
-        String s2 = "a test!!!";
-
+        String s1 = "this is ";
+        String s2 = "a new test ";
         applyBehaviour(stringAdder, s1, s2);
         applyBehaviour(leghtOrder, s1, s2);
+
+        int intArray[] = {5, 3, 4, 7, 2, 6};
+        Arrays.stream(intArray)
+                .filter(i -> i > 4)
+                .sorted()
+                .map(i -> i * i)
+                .forEach(System.out::println);
     }
 }
