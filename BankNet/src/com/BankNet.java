@@ -110,7 +110,8 @@ public class BankNet {
         }
         List<String> unsafeBanks = checkBanks
                 .stream()
-                .map(i -> mapToName.apply(i))
+//              .map(i -> mapToName.apply(i))
+                .map(mapToName::apply) // Method reference
                 .sorted((a, b) -> b.compareTo(a))
                 .collect(Collectors.toList());
         return unsafeBanks;
