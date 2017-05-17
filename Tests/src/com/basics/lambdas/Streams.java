@@ -2,11 +2,9 @@ package com.basics.lambdas;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import static oracle.jrockit.jfr.JFR.get;
 
 public class Streams {
 
@@ -31,10 +29,5 @@ public class Streams {
                 .map(i -> i + 10)
                 .collect(Collectors.toList());
         System.out.println(intList);
-
-        Stream.of()
-                .findFirst()
-                .ifPresent(System.out::println);
-
     }
 }
