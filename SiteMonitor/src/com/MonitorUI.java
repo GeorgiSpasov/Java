@@ -5,55 +5,136 @@
  */
 package com;
 
-import java.awt.GridLayout;
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
  *
- * @author Shadow
+ * @author Georgi Spasov
  */
 public class MonitorUI extends JFrame {
-    
-    protected JLabel siteData;
-    protected JButton btnGetData;
+
+    protected String data;
+    protected JLabel dataContainer;
     protected JPanel innerPanel;
     protected SiteMonitor monitor;
-    
-    public MonitorUI() {
-        super("Data Monitor");
-        
-        this.siteData = new JLabel();
-        this.btnGetData = new JButton();
-        this.innerPanel = new JPanel();
-        this.monitor = new SiteMonitor();
-        
-        innerPanel.setLayout(new GridLayout(2, 1));
-        innerPanel.add(siteData);
-        innerPanel.add(btnGetData);
-        
-        getContentPane().add(innerPanel);
-        
-        btnGetData.setText("Get Data");
-        btnGetData.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    siteData.setText(monitor.sendGet());
-                } catch (Exception ex) {
+    protected ImageIcon icon;
+
+    protected SystemTray tray;
+    protected TrayIcon trayIcon;
+
+    private MonitorUI() {
+        super("Site Monitor");
+        icon = new ImageIcon(getClass().getResource("/com/monitor.png"));
+        dataContainer = new JLabel();
+        innerPanel = new JPanel();
+        monitor = new SiteMonitor();
+
+        setIconImage(icon.getImage());
+
+        if (SystemTray.isSupported()) {
+            tray = SystemTray.getSystemTray();
+
+            ActionListener exitListener = new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            };
+            PopupMenu popup = new PopupMenu();
+            MenuItem defaultItem = new MenuItem("Exit");
+            defaultItem.addActionListener(exitListener);
+            popup.add(defaultItem);
+            defaultItem = new MenuItem("Open");
+            defaultItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(true);
+                    setExtendedState(JFrame.NORMAL);
+                }
+            });
+            popup.add(defaultItem);
+            trayIcon = new TrayIcon(icon.getImage(), "Site Monitor", popup);
+            trayIcon.setImageAutoSize(true);
+        } else {
+        }
+
+        addWindowStateListener(new WindowStateListener() {
+            public void windowStateChanged(WindowEvent e) {
+                if (e.getNewState() == ICONIFIED || e.getNewState() == 7) {
+                    try {
+                        tray.add(trayIcon);
+                        setVisible(false);
+                    } catch (AWTException ex) {
+                    }
+                }
+                if (e.getNewState() == MAXIMIZED_BOTH || e.getNewState() == NORMAL) {
+                    tray.remove(trayIcon);
+                    setVisible(true);
                 }
             }
         });
-        
-        setSize(150, 150);
+
+        dataContainer.setOpaque(true);
+        dataContainer.setBackground(Color.WHITE);
+//        dataContainer.setForeground(Color.red);
+        dataContainer.setText("Getting data from site...");
+        dataContainer.setToolTipText("Click to close");
+        dataContainer.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                dispatchEvent(new WindowEvent(MonitorUI.this, WindowEvent.WINDOW_CLOSING));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                dataContainer.setBackground(Color.lightGray);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                dataContainer.setBackground(Color.white);
+            }
+        });
+
+        innerPanel.setOpaque(false);
+        innerPanel.setLayout(new FlowLayout());
+        innerPanel.add(dataContainer);
+
+        getContentPane().add(innerPanel);
+
+        setUndecorated(true);
+        setBackground(new Color(0, 0, 0, 0));
+        pack();
+        setAlwaysOnTop(true);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        while (true) {
+            try {
+                data = monitor.sendGet();
+                dataContainer.setText(this.data);
+                trayIcon.setToolTip(data);
+                Thread.sleep(600000);
+                dataContainer.setText("Refreshing...");
+            } catch (Exception ex) {
+            }
+        }
     }
-    
+
     public static void main(String[] args) {
         new MonitorUI();
     }
